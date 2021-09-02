@@ -1,0 +1,1449 @@
+html {scroll-behavior: smooth;}
+
+:root {
+    --accent: #f4ce01;
+    --bg: #1b1b20;
+    --base: #eee;
+
+    --text-title: 'Open Sans', sans-serif;
+    --text: 'Open Sans', sans-serif;
+    --text-cta: 'League Gothic', sans-serif;
+    --text-cta-cndns: 'League Gothic Condensed Italic', sans-serif;
+    --text-pris: 'Open Sans Condensed', sans-serif;
+}
+
+body {
+    font-family: var(--text);
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--bg);
+    padding: 0;
+    margin: 0;
+    line-height: 1.6;
+}
+
+* {box-sizing: border-box;}
+
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1;
+}
+
+h1, h2 {
+    font-size: 2rem;
+    margin: 0 0 2rem 0;
+    text-transform: uppercase;
+}
+
+h1 {
+    font-family: var(--text-cta-cndns);
+    font-size: 6rem;
+    font-weight: 300;
+    letter-spacing: .2rem;
+    color: var(--accent);
+}
+
+h2 {
+    font-family: var(--text-title);
+    font-size: clamp(2rem, 2rem + 1vw, 6rem);
+    font-weight: 700;
+}
+
+h3 {
+    font-size: clamp(1.4rem, 1.4rem + 1vw, 2.3rem);
+    margin: 0 0 1rem 0;
+    text-transform: uppercase;
+}
+
+h4, h5, h6 {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+p,
+form input,
+form textarea {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+a:link,
+a:active,
+a:visited {
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--bg);
+    transition: color 250ms ease;
+    position: relative;
+}
+
+a:hover {
+    color: var(--accent);
+}
+
+    p a:link,
+    p a:active,
+    p a:visited {
+        font-weight: 700;
+    }
+
+section {
+    padding: 6rem 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    padding: 0;
+    z-index: 2;
+    max-width: 100%;
+}
+
+@media screen and (min-width: 768px){
+    section {
+        padding: 6rem 3rem;
+    }
+
+    .container {
+        max-width: calc(768px - 4rem);
+    }
+}
+
+
+@media screen and (min-width: 1280px) {
+    .container {
+        max-width: 1280px;
+    }
+
+    h2 {
+        margin: 0 0 4rem 0;
+    }
+}
+
+
+
+/* 
+--------------------------------------------------------------
+HEADER
+- Logo
+- Navigtaion
+- Responsive nav
+--------------------------------------------------------------
+*/
+
+header {
+    background: var(--bg);
+    height: 5rem;
+    width: 100%;
+    color: var(--base);
+    padding: 0 2rem;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    transition: all 500ms ease;
+}
+
+header.navbar--top {
+    background-color: transparent;
+}
+
+.scroll-down .navbar {
+    transform: translateY(-100%);
+}
+
+.scroll-up .navbar {
+    transform: none;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo svg {
+    width: 8rem;
+}
+
+    .logo__line1 {
+        fill: var(--base);
+    }
+    
+    .logo__line2 {
+        fill: var(--accent);
+    }
+
+.img {
+    width: 100%;
+}
+
+img {
+    width: 100%;
+}
+
+.nav__toggle {
+    display:none;
+}
+
+    .nav__toggle--label {
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+    }
+
+    .nav__toggle--label:hover {
+        cursor: pointer;
+    }
+
+    .nav__toggle--label span {
+        position: relative;
+    }
+
+    .nav__toggle--label span,
+    .nav__toggle--label span::before,
+    .nav__toggle--label span::after {
+        display: block;
+        width: 2.5rem;
+        height: 2px;
+        background: var(--accent);
+        transition: all 250ms ease;
+    }
+
+    .nav__toggle--label span::before,
+    .nav__toggle--label span::after {
+        content: '';
+        position: absolute;
+        top: -.75rem;
+        left: 0;
+    }
+
+    .nav__toggle--label span::before {
+        top: .75rem;
+    }
+
+header nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    padding: 6rem 0 0 0;
+    background: var(--bg);
+    z-index: 1;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 250ms ease-out;
+}
+
+    header .menu__item {
+        font-size: 2rem;
+        text-align: center;
+        font-weight: 500;
+        text-transform: uppercase;
+        padding: .25rem 0;
+        position: relative;
+    }
+
+    header .menu__item a {
+        color: var(--base);
+        transition: color 300ms ease;
+    }
+
+    header .menu__item a:hover {
+        color: var(--accent);
+    }
+
+    header .menu__item:last-child {
+        padding-top: 3rem;
+    }
+
+    header .menu__item:last-child a {
+        font-family: var(--text-cta);
+        color: var(--accent);
+        font-weight: 700;
+        font-size: 3rem;
+        letter-spacing: .1rem;
+    }
+
+header .logo {
+    z-index: 2;
+}
+
+/* 
+CHECKED STATE 
+Når menuen er fremme i mobile view
+*/
+
+/* Ved checked state, lav hamburger om til kryds */
+.nav__toggle:checked ~ .nav__toggle--label > span {
+    transform: rotate(135deg);
+}
+
+.nav__toggle:checked ~ .nav__toggle--label > span::before,
+.nav__toggle:checked ~ .nav__toggle--label > span::after {
+    top: 0;
+    transform: rotate(-90deg);
+}
+
+.nav__toggle:checked ~ nav {
+    visibility: visible;
+    opacity: 1;
+    /* transform: translateY(0) */
+}
+
+/* MEDIA QUERY FOR HEADER*/
+
+@media screen and (min-width: 768px) {
+
+    header .container {
+        max-width: none;
+    }
+
+    .nav__toggle--label {
+        display: none;
+    }
+
+    header nav,
+    header nav ul li {
+        all: unset;
+    }
+
+    header nav ul {
+        display: flex;
+        align-items: center;
+    }
+
+    header .menu__item {
+        font-size: .8rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        padding: 0;
+    }
+    
+        header .menu__item + .menu__item {
+            margin-left: 1rem;
+            padding: 0;
+        }
+
+        header .menu__item:last-child a {
+            margin-left: 2rem;
+            font-size: clamp(1rem, 1rem + 1vw, 2.5rem);
+        }
+
+        header .menu__item:not(:last-child)::before {
+            content:'';
+            display: block;
+            position: absolute;
+            background: var(--accent);
+            height: 5px;
+            top: -.5rem;
+            right: 0;
+            left: 0;
+            transform: scale(0, 1);
+            transition: transform 250ms ease; 
+        }
+    
+        header .menu__item:hover::before {
+            transform: scale(1, 1);
+        }
+}
+
+@media screen and (min-width: 1280px) {
+    header .container {
+        max-width: 1280px;
+    }
+
+    header .menu__item {
+        font-size: 1rem;
+    }
+    
+    header .menu__item + .menu__item {
+        margin-left: 3rem;
+    }
+}
+
+
+/* 
+--------------------------------------------------------------
+
+Element: Content List
+Section: Alle
+
+--------------------------------------------------------------
+*/
+
+.list__content .list__item {
+    text-transform: uppercase;
+    font-weight: 600;
+    position: relative;
+    margin-left: 2.2rem;
+}
+
+.list__content .list__item + .list__item {
+    margin-top: .75rem;
+}
+
+.list__content .list__item::before {
+    content:'\f45c';
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: clamp(.7rem, .9rem + .5vw, 1rem);
+    position: absolute;
+    left: -2rem;
+    color: var(--accent);
+}
+
+/* .list__content .list__item a:link,
+.list__content .list__item a:active,
+.list__content .list__item a:visited {
+    font-size: 1rem;
+    position: relative;
+    color: var(--bg);
+} */
+
+.list__item a {
+    transition: all 250ms ease;
+}
+
+.list__item a:hover {
+    color: var(--accent);
+}
+
+ @media screen and (min-width: 768px) {
+
+    .list__content {
+        margin-left: 2rem;
+    }
+ }
+
+/*
+Liste med priser
+*/
+
+#priser .list__content .list__item {
+    display: flex;
+    justify-content: space-between;
+}
+
+#priser .list__content .list__item span:last-child {
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+/* 
+
+Liste: Services
+
+*/
+
+.list__content.links .list__item::before {
+    content:'\f054';
+    left: -1rem;
+}
+
+/* 
+
+External links Ikon
+
+*/
+
+.link--external {
+    position: relative;
+    margin-right: 1.3rem;
+}
+
+.link--external::after {
+    content: '';
+    display: block;
+    position: absolute;
+    mask: url(../img/external_link.svg) no-repeat;
+    -webkit-mask: url(../img/external_link.svg) no-repeat;
+    background-color: var(--bg);
+    height: 32px;
+    width: 32px;
+    right: -2.5rem;
+    bottom: .3rem;
+    height: .75rem;
+}
+
+/*
+External links i brødtekst 
+*/
+
+p .link--external:hover::after {
+    background: var(--accent);
+}
+
+.link--external:hover::after {
+    background: var(--accent);
+}
+
+/*
+external link i lister
+*/
+
+.list__item .link--external::after {
+    background: var(--bg);
+}
+
+    .list__item .link--external:hover::after {
+        background: var(--accent);
+    }
+
+/* 
+
+list__content
++ billede
+
+*/
+
+.list__img {
+    max-width: 30rem;
+    margin: 3rem 0;
+    /* justify-self: center; */
+}
+
+
+
+/* 
+--------------------------------------------------------------
+
+Side: Forside
+Section: Hero
+
+--------------------------------------------------------------
+*/
+
+#hero {
+    min-height: 30rem;
+    height: calc(100vh - 5rem);
+    display: grid;
+    place-items: center;
+    text-align: center;
+    background: var(--base);
+    position: relative;
+    background: var(--bg);
+    color: var(--base);
+}
+
+    #hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-image: url(../img/hummer.jpg);
+        background-size: cover;
+        background-position-x: 40%;
+        background-position-y: 50%;
+        opacity: .1;
+        
+    }
+
+    #hero div {
+        z-index: 1;
+    }
+
+    #hero p {
+        text-transform: uppercase;
+        font-size: clamp(1.5rem, 1.5rem + 1vw, 3rem);
+        font-weight: 700;
+        letter-spacing: .1rem;
+        text-shadow: var(--bg) 2px 2px 2px;
+    }
+
+    #hero button {
+        font-family: var(--text-cta);
+        font-weight: 100;
+        text-transform: uppercase;
+        border: none;
+        padding: .5rem 1.5rem;
+        font-size: clamp(2rem, 2rem + 1vw, 3rem);
+        background: var(--accent);
+        cursor: pointer;
+        margin-top: 2rem;
+        transition: all 250ms ease;
+    }
+
+    #hero button:hover {
+        background: var(--bg);
+    }
+
+    #hero button a {
+        letter-spacing: .2rem;
+        font-weight: 300;
+    }
+
+    #hero button:hover a {
+        color: var(--accent);
+    }
+
+
+    #hero.intro {
+        min-height: 10rem;
+        height: 20rem;
+        padding: 8rem 0;
+    }
+/* 
+--------------------------------------------------------------
+
+Side: Forside
+Section: Contact
+
+--------------------------------------------------------------
+*/
+
+#contact {
+    font-family: var(--text-cta);
+    background: var(--bg);
+    display: grid;
+    grid-template-rows: 7rem 1fr;
+    justify-content: stretch;
+    place-items: center;
+    padding: 0;
+}
+
+    #contact div {
+        text-align: center;
+        color: var(--base);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        padding: 1rem 0;
+    }
+
+    #contact p,
+    #contact i {
+        margin: 0;
+        font-size: clamp(2rem, 1vw, 2.5rem);
+        letter-spacing: .2rem;
+    }
+
+    #contact div:first-child {
+        background: var(--accent);
+        color: var(--bg);
+        clip-path: polygon(0 0, 100% 0%, 100% 70%, 0% 100%);
+        padding: 0 0 1rem 0;
+    }
+
+    #contact svg {
+        width: 2rem;
+        height: 2rem;
+        margin-right: .75rem;
+    }
+
+    #contact div:first-child p {
+        position: relative;
+        margin-left: 1rem;
+    }
+
+    #contact div:last-child {
+        color: var(--accent)
+    }
+
+    @media screen and (min-width: 768px) {
+        #contact {
+            grid-template-rows: none;
+            grid-template-columns: 53% 1fr;
+        }
+
+        #contact div:first-child {
+            clip-path: polygon(0 0, 100% 0%, 95% 100%, 0% 100%);
+            padding: 1rem 0;
+        }
+    }
+
+    @media screen and (min-width: 1280px) {
+        #contact {
+            grid-template-columns: 1fr 1fr;
+            background: none;
+            width: 70rem;
+            margin: 0 auto;
+        }
+
+        #contact p {
+            letter-spacing: .5rem;
+        }
+
+         #contact div:first-child {
+            clip-path: polygon(0 0, 100% 0%, 100% 100%, 10% 100%);
+            padding: 1rem 0 1rem 2rem;
+        }
+
+        #contact div:last-child {
+            background: var(--bg);
+            clip-path: polygon(0 0, 100% 0%, 90% 100%, 0% 100%);
+            padding-right: 2rem;
+        }
+    }  
+
+/* 
+--------------------------------------------------------------
+
+Side: Forside
+Section: Vi tilbyder / Offers
+
+--------------------------------------------------------------
+*/
+
+#offers {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    place-items: center;
+}
+
+    #offers .img {
+        grid-row: 2 / 3;
+        max-width: 24rem;
+    }
+
+    #offers div:last-child {
+        justify-self: center;
+    }
+
+    #offers ul {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 0 2rem;
+    }
+
+    #offers ul .list__item {
+        text-transform: uppercase;
+        font-size: clamp(.7rem, .9rem + .5vw, 1.2rem);
+        font-weight: 600;
+        position: relative;
+    }
+
+    #offers ul .list__item + .list__item {
+        margin-top: .75rem;
+    }
+
+    #offers ul .list__item::before {
+        content:'\f00c';
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        font-size: clamp(1rem, 1rem + 1vw, 1.6rem);
+        position: absolute;
+        top: -.2rem;
+        left: -2rem;
+        color: var(--accent);
+    }
+
+    @media screen and (min-width: 768px) {
+        #offers {
+            display: flex;
+            justify-content: center;
+        }
+
+        #offers .img {
+            width: 50%;
+            margin-right: 2rem;
+            width: 30rem;
+        }
+
+        #offers ul {
+            margin-left: 2.3rem;
+        }
+
+        #offers ul .list__item::before {
+            left: -2.3rem;
+        }
+    }
+
+    @media screen and (min-width: 1200px) {
+        #offers ul {
+            margin-left: 2.5rem;
+        }
+
+        #offers ul .list__item::before {
+            top: -.3rem;
+            left: -2.5rem;
+        }
+    }
+
+/* 
+--------------------------------------------------------------
+
+Side: Forside
+Section: Socials
+
+--------------------------------------------------------------
+*/
+
+#socials {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    background: var(--bg);
+    color: var(--base);
+    position: relative;
+}
+
+    #socials::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-image: url(../img/tire.jpg);
+        background-size: cover;
+        background-position-x: 50%;
+        background-position-y: 50%;
+        opacity: .3;
+    }
+
+    #socials div,
+    #socials p {
+        z-index: 2;
+    }
+
+    #socials div {
+        margin-bottom: 2rem;   
+    }
+
+    #socials p {
+        margin: 0;
+        font-weight: 300;
+    }
+
+    #socials p span {
+        font-weight: 600;
+    }
+
+    #socials p:nth-of-type(1) {
+        line-height: 1;
+        font-size: 2.5rem;
+    }
+
+    #socials p:nth-of-type(2) {
+        font-size: 1rem;
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+
+    #socials div i {
+        font-size: 6rem;
+        color: var(--accent);
+    }
+
+    @media screen and (min-width: 768px) {
+        #socials p:nth-of-type(1) {
+            line-height: 1;
+            font-size: 3rem;
+        }
+
+    }
+
+    @media screen and (min-width: 1280px) {
+        #socials p:nth-of-type(1) {
+            line-height: 1.25;
+            font-size: 4rem;
+        }
+
+    }
+
+/* 
+--------------------------------------------------------------
+
+Side: Forside
+Section: Services
+
+--------------------------------------------------------------
+*/
+
+
+#services .container {
+    display: flex;
+    flex-direction: column;
+}
+
+    #services .wrap {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-evenly;
+        gap: 2rem;
+    }
+
+    @media screen and (min-width: 768px) {
+        #services h2 {
+            text-align: center;
+        }
+
+        #services .wrap {
+            justify-content: space-between;
+        }
+
+        #services .wrap div {
+        width: 20rem;
+        }
+
+        #services div + div {
+            margin: 0;
+        }
+    }
+
+    @media screen and (min-width: 1280px) {
+
+        #services .wrap {
+            justify-content: space-around;
+            gap: 4rem;
+        }
+    }
+
+/* 
+--------------------------------------------------------------
+
+Side: Forside
+Section: Ask / Stil spørgsmål
+
+--------------------------------------------------------------
+*/
+
+#ask {
+    background: var(--accent);
+    position: relative;
+}
+
+    #ask::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-image: url(../img/tires_ask.jpg);
+        background-size: cover;
+        background-position-x: 50%;
+        background-position-y: 50%;
+        filter: saturate(0);
+        opacity: .3;
+    }
+
+    #ask h2,
+    #ask p,
+    #ask form {
+        position: relative;
+        z-index: 2;
+    }
+
+    #ask p {
+        font-weight: 600;
+        text-shadow: var(--accent) 1px 0 2px;
+    }
+
+     #ask form {
+         display: flex;
+         flex-direction: column;
+         margin-top: 2rem;
+     }
+
+     #ask form input,
+     #ask form textarea {
+         border: 0;
+         margin-bottom: 1rem;
+         padding: .5rem;
+         font-family: var(--text);
+     }
+
+     #ask .btn {
+        font-family: var(--text-cta);
+        border: none;
+        padding: .5rem 1.5rem;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: .2rem;
+        background: var(--bg);
+        color: var(--accent);
+        margin: 0;
+        cursor: pointer;
+        box-shadow: 0px 0px 6px -2px var(--bg);
+        transition: all 250ms ease;
+     }
+
+     #ask .btn:hover {
+         background: var(--accent);
+         color: var(--bg);
+     }
+
+@media screen and (min-width: 768px) {
+    #ask .container {
+        display: flex;
+        gap: 4rem;
+    }
+
+    #ask .container div:first-child {
+        width: 40%;
+    }
+
+    #ask .container div:last-child {
+        width: 60%;
+    }
+
+    #ask .btn {
+        align-self: start;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+
+    #ask .container div {
+        width: 50%;
+    }
+
+
+}
+
+/* 
+--------------------------------------------------------------
+
+Side: Dæk & Fælge
+Section: 1
+
+--------------------------------------------------------------
+*/
+
+#daek h3 {
+    margin-top: 3rem;
+}
+
+/* 
+--------------------------------------------------------------
+
+Side: Alle
+Section: Priser
+
+--------------------------------------------------------------
+*/
+
+#priser {
+    background: #e8fbff;
+}
+
+    #priser h2 {
+        text-align: center;
+    }
+
+    #priser p {
+        text-align: center;
+    }
+
+    #priser .wrap {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-evenly;
+        gap: 4rem;
+    }
+    
+    #priser .wrap > div {
+        width: 20rem;
+    }
+
+    #priser .list__item {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(27, 27, 32, .3);
+        height: 2rem;
+    }
+
+    #priser .list__item + .list__item {
+        padding-top: .2rem;
+    }
+
+    #priser .list__item span {
+        display: flex;
+        align-items: end;
+        line-height: 1;
+    }
+
+    #priser .list__item span:first-child {
+        text-transform: uppercase;
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
+
+    #priser .list__item span:last-child {
+        font-family: var(--text-pris);
+        font-size: 1.8rem;
+        font-weight: 300;
+        letter-spacing: .05rem;
+        position: relative;
+    }
+
+    #priser .list__item:hover {
+        background: white;
+    }
+
+    #priser .note {
+        font-style: italic;
+        font-size: .75rem;
+        text-align: center;
+        margin: 2rem 0 0 0;    
+    }
+
+    #priser .wrap .note {
+        text-align: left;
+        margin: .5rem 0 0 0;
+    }
+
+    @media screen and (min-width: 768px) {
+
+        #priser .wrap {
+            justify-content: space-evenly;
+        }
+
+    }
+
+    @media screen and (min-width: 1280px) {
+
+        #priser .wrap {
+            justify-content: space-between;
+            gap: 4rem;
+        }
+    }
+
+/* Priser - Daek & Fælge */
+
+.priser--fra {
+    position: relative;
+}
+
+.priser--fra::before {
+    content:'fra';
+    display: block;
+    position: absolute;
+    font-size: 1.5rem;
+    left: -2rem;
+    bottom: .1rem;
+    opacity: .8;
+}
+
+
+/* Priser - Dækhotel */
+
+#priser.hotel .list__item {
+    height: 3rem;
+}
+
+#priser.hotel .list__item span:first-child {
+    text-transform: uppercase;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* 
+--------------------------------------------------------------
+
+Side: Kontakt
+
+--------------------------------------------------------------
+*/
+
+#story .container {
+    max-width: 50rem;
+}
+
+#kontakt {
+    padding: 0 3rem 6rem 3rem;
+}
+
+#kontakt .container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 2rem;
+}
+
+#kontakt .logo svg {
+    width: 16rem;
+    margin-bottom: 2rem;
+}
+
+    #kontakt svg .logo__line1 {
+        fill: var(--bg);
+    }
+
+#kontakt .info p {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+#kontakt .info div + div {
+    margin-top: 2rem;
+}
+
+.map {
+    width: 100%;
+}
+
+.map iframe {
+    width: 100%;
+    border: 2px solid var(--accent);
+}
+
+@media screen and (min-width: 1280px) {
+    #kontakt .container {
+        flex-direction: row;
+    }
+
+    .map {
+        max-width: 50rem;
+    }
+}
+
+/* 
+--------------------------------------------------------------
+
+Socials
+footer og #kontakt
+
+--------------------------------------------------------------
+*/
+
+.socials li {
+    display: inline;
+    height: 2.5rem;
+    margin-right: 1rem;
+}
+
+
+    .socials svg {
+        height: 2.5rem;
+        margin-right: .6rem;
+        fill: var(--bg);
+    }
+
+    .socials svg:hover {
+        fill: var(--accent);
+    }
+
+    footer .socials svg {
+        fill: var(--accent);
+    }
+
+    footer .socials svg:hover {
+        fill: var(--base)
+    }
+
+/* 
+--------------------------------------------------------------
+
+Side: Alle
+Section: Footer
+
+--------------------------------------------------------------
+*/
+
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4rem 0;
+    background: var(--bg);
+    position: relative;
+}
+
+    footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-image: url(../img/kort.png);
+        background-repeat: no-repeat;
+        background-position-x: 10%;
+        background-position-y: 100%;
+        opacity: .1;
+    }
+
+    footer .container,
+    footer .footer__payment {
+        z-index: 2;
+    }
+
+footer > div > div {
+    margin-bottom: 5rem;
+    width: 14rem;
+}
+
+    footer svg {
+        height: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    footer h3,
+    footer p {
+        color: var(--base);
+        text-transform: uppercase;
+    }
+
+    footer h3 {
+        font-size: clamp(1.1rem, 1.1rem + 1vw, 1.4rem);
+        margin-top: 1.6rem;
+    }
+
+    footer p {
+        font-size: 1rem;
+        margin: 0;
+    }
+
+    footer .footer__contact div + div {
+        margin-top: 1rem;
+    }
+
+    footer i,
+    #kontakt i {
+        color: var(--accent);
+        display: inline-block;
+        margin-right: .6rem;
+    }
+
+    .footer__socials ul li {
+        display: inline;
+        font-size: 2rem;
+    }
+
+    .footer__socials ul li:last-child {
+        font-weight: 2.2rem;
+    }
+
+.footer__partners .list__item a {
+    font-size: 1rem;
+    position: relative;
+    color: var(--accent);
+}
+
+    .footer__partners a:hover {
+        color: var(--base);
+    }
+
+    .footer__partners .link--external::after {
+        background-color: var(--accent);
+    }
+
+    .footer__partners .link--external:hover::after {
+        background-color: var(--base);
+    }
+
+
+
+.footer__hours .list__item {
+    display: flex;
+    justify-content: space-between;
+    color: var(--base);
+    font-size: 1rem;
+}
+
+.footer__payment {
+    width: 17rem;
+    align-self: start;
+}
+
+    .footer__payment .list__item {
+        display: inline;
+    }
+
+    .footer__payment .list__item + .list__item {
+        margin-top: .5rem;
+    }
+
+    .footer__payment img {
+        width: 10rem;
+}
+
+.footnote {
+    position: absolute;
+    bottom: 1rem;
+}
+
+.footnote p {
+    font-size: .65rem;
+    color: var(--base);
+    text-align: center;
+}
+
+.footnote a {
+    color: var(--accent);
+}
+
+@media screen and (min-width: 768px) {
+    footer > div > div {
+        margin-bottom: 0;
+    }
+
+    footer::before {
+        background-position-x: center;
+        background-position-y: 100%; 
+    }
+    
+    footer .container {
+        display: grid;
+        grid-template-columns: 20rem 1fr;
+        grid-template-rows: 1fr auto;
+        gap: 4rem;
+        grid-template-areas:
+        "contact partners"
+        "payment hours";
+    }
+
+    .footer__contact {grid-area: contact;}
+    .footer__partners {grid-area: partners;}
+    .footer__hours {grid-area: hours;}
+    .footer__payment {grid-area: payment;}
+}
+
+@media screen and (min-width: 1280px) {
+    footer::before {
+        background-position-y: center;
+        background-position-x: 10%;
+    }
+
+    footer .container {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 5.56rem 1fr;
+        grid-template-areas:
+        "contact . . partners hours"
+        "contact . . partners payment";
+        grid-gap: 0;
+        margin: 4rem 0 6rem 0;
+    }
+
+    .footer__hours,
+    .footer__payment {
+        justify-self: end;
+        width: 14.5rem;
+    }
+
+    .footer__payment {
+        margin-top: 1.4rem;
+    }
+
+    footer > div > div {
+        margin-bottom: 0;
+    }
+}
